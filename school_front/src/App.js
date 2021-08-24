@@ -1,12 +1,17 @@
 
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar,Container,Nav,NavDropdown} from 'react-bootstrap';
+import {Navbar,Container,Nav,NavDropdown, Row,Carousel} from 'react-bootstrap';
+
+
+const caps=[{head:"education", body:"come to school",img:"Child.jpg"},
+            {head:"education", body:"come to school",img:"Kid-using-a-computer.jpg"},
+            {head:"education", body:"come to school",img:"kids-computers.jpeg"}]
 
 const Menubar =()=>{
   return(
 
-    <Navbar bg="Dark" expand="lg" >
+    <Navbar bg='dark' variant='dark' expand="xl" >
         <Container>
           <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,6 +27,11 @@ const Menubar =()=>{
             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
            </NavDropdown>
          </Nav>
+         <Nav>
+            <Nav.Link eventKey={2} href="#memes">
+              logIn/Register
+            </Nav.Link>
+          </Nav>
         </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -29,11 +39,47 @@ const Menubar =()=>{
   );
 }
 
+const Slides =()=>{
+  return(
+    <Carousel fade variant="light">
+      {caps.map((cap,index)=>{
+        return(
+        <Carousel.Item key={index} style={{'height':"600px",'width':"100%" , 'background-color': 'black'}}>
+          <img style={{'object-fit':" contain",'opacity': 0.5}}
+            className="d-block w-100"
+             src={`assets/images/${cap.img}`}
+            alt={`${index} slide`}
+          />
+            <Carousel.Caption>
+              <h5>{cap.head}</h5>
+             <p>{cap.body}</p>
+            </Carousel.Caption>
+        </Carousel.Item>
+        )
+      }
+      )
+    }
+    </Carousel>
+    
+  
+  );
+
+}
+
 function App() {
   return (
-    <div className="App">
-      <Menubar/>
-    </div>
+    <Container className="App" bg='dark'>
+      
+        <Row>
+          <Menubar/>
+        </Row>
+        <Row>
+          <Slides/>
+        </Row>
+        <Row>
+         
+        </Row>
+      </Container>
   );
 }
 
